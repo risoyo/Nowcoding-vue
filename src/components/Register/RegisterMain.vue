@@ -40,58 +40,29 @@ export default {
     }
   },
   methods: {
-    // onSubmit() {
-    //   console.log('submit!');
-    //   console.log('form is:' + JSON.stringify(this.form));
-    //   let url = '/community/alpha/student';
-    //   this.$axios.post(url, {
-    //     name: '孙悟空1',
-    //     // age: '17'
-    //   })
-    //     .then(function (response) {
-    //       console.log(response);
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-
-    // }
-    // onSubmit() {
-    //   console.log('submit!');
-    //   console.log('form is:' + JSON.stringify(this.form));
-    //   let url = '/community/alpha/student';
-    //   let list = this.form;
-
-    //   let formData = new window.FormData();
-    //   //这里将表单数据封装成json保存到formData中
-    //   formData.append("formData", new Blob([JSON.stringify(list)], { type: "application/json" }));
-    //   this.$axios({
-    //     method: "POST",
-    //     url: url,
-    //     headers: {
-    //       'Content-Type': 'multipart/form-data'
-    //     },
-    //     data: formData
-    //   }).then(function (res) {
-    //     console.log(res);
-    //   }).catch(function (err) {
-    //     console.log(err)
-    //   });
-    // }
     onSubmit() {
       console.log('submit!');
       console.log('form is:' + JSON.stringify(this.form));
+      // 指定访问的URL
       let url = '/community/alpha/student';
       this.$axios({
+        // 指定POST方法
         method: "POST",
+        // 指定数据格式
         dataType: "json",
+        // 指定访问的URL
         url: url,
+        // 指定header
         headers: {
           'Content-Type': 'application/json;charset=UTF-8'
         },
+        // 将data中的form存入axios.POST请求的数据节点中
         data: JSON.stringify(this.form)
+        // then->接收返回响应
       }).then(function (res) {
         console.log(res);
+        // 将响应res打印出来
+        console.log(JSON.stringify(res.data.code));
       }).catch(function (err) {
         console.log(err)
       });
