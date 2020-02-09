@@ -40,9 +40,61 @@ export default {
     }
   },
   methods: {
+    // onSubmit() {
+    //   console.log('submit!');
+    //   console.log('form is:' + JSON.stringify(this.form));
+    //   let url = '/community/alpha/student';
+    //   this.$axios.post(url, {
+    //     name: '孙悟空1',
+    //     // age: '17'
+    //   })
+    //     .then(function (response) {
+    //       console.log(response);
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+
+    // }
+    // onSubmit() {
+    //   console.log('submit!');
+    //   console.log('form is:' + JSON.stringify(this.form));
+    //   let url = '/community/alpha/student';
+    //   let list = this.form;
+
+    //   let formData = new window.FormData();
+    //   //这里将表单数据封装成json保存到formData中
+    //   formData.append("formData", new Blob([JSON.stringify(list)], { type: "application/json" }));
+    //   this.$axios({
+    //     method: "POST",
+    //     url: url,
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data'
+    //     },
+    //     data: formData
+    //   }).then(function (res) {
+    //     console.log(res);
+    //   }).catch(function (err) {
+    //     console.log(err)
+    //   });
+    // }
     onSubmit() {
       console.log('submit!');
-      console.log(`form is: ${this.form}`);
+      console.log('form is:' + JSON.stringify(this.form));
+      let url = '/community/alpha/student';
+      this.$axios({
+        method: "POST",
+        dataType: "json",
+        url: url,
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+        data: JSON.stringify(this.form)
+      }).then(function (res) {
+        console.log(res);
+      }).catch(function (err) {
+        console.log(err)
+      });
     }
   }
 }
@@ -54,8 +106,8 @@ export default {
   font-size: 30px;
   color: rgb(48, 214, 214);
 }
-.register-form{
+.register-form {
   padding-left: 350px;
-  padding-right:350px;
+  padding-right: 350px;
 }
 </style>
