@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */ /* eslint-disable prettier/prettier */
 <template>
   <div class="hello">
     <el-tabs v-model="activeName" @tab-click="handleClick" type="card">
@@ -32,7 +33,8 @@
             :total="totalPageNumber"
             :current-page="currentPageNumber"
             layout="prev, pager, next"
-          ></el-pagination>
+          >
+          </el-pagination>
         </div>
       </el-tab-pane>
 
@@ -51,7 +53,7 @@ export default {
       currentPageNumber: 1,
       totalPageNumber: 0,
       maxRowsPerPage: 10,
-      activeName: "first",
+      activeName: 'first',
       infos: []
     };
   },
@@ -68,9 +70,9 @@ export default {
   methods: {
     handleUrlChange(PageNumber) {
       const url =
-        "/community/getIndexPost?currentPageNumber=" +
+        '/community/getIndexPost?currentPageNumber=' +
         PageNumber +
-        "&maxRowsPerPage" +
+        '&maxRowsPerPage' +
         this.maxRowsPerPage;
       console.log(`url to: ${url}`);
       this.$axios

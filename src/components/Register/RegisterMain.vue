@@ -58,43 +58,43 @@
 export default {
   data() {
     const validatePass = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入密码"));
+      if (value === '') {
+        callback(new Error('请输入密码'));
       } else {
-        if (this.ruleForm.checkPass !== "") {
-          this.$refs.ruleForm.validateField("checkPass");
+        if (this.ruleForm.checkPass !== '') {
+          this.$refs.ruleForm.validateField('checkPass');
         }
         callback();
       }
     };
     const validatePass2 = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请再次输入密码"));
+      if (value === '') {
+        callback(new Error('请再次输入密码'));
       } else if (value !== this.ruleForm.pass) {
-        callback(new Error("两次输入密码不一致!"));
+        callback(new Error('两次输入密码不一致!'));
       } else {
         callback();
       }
     };
     const checkEmail = (rule, value, callback) => {
       if (!value) {
-        callback(new Error("请输入邮箱"));
+        callback(new Error('请输入邮箱'));
       } else {
         callback();
       }
     };
     return {
       ruleForm: {
-        name: "",
-        pass: "",
-        checkPass: "",
-        email: "",
-        verifyCode: ""
+        name: '',
+        pass: '',
+        checkPass: '',
+        email: '',
+        verifyCode: ''
       },
       rules: {
-        pass: [{ validator: validatePass, trigger: "blur" }],
-        checkPass: [{ validator: validatePass2, trigger: "blur" }],
-        email: [{ validator: checkEmail, trigger: "blur" }]
+        pass: [{ validator: validatePass, trigger: 'blur' }],
+        checkPass: [{ validator: validatePass2, trigger: 'blur' }],
+        email: [{ validator: checkEmail, trigger: 'blur' }]
       }
     };
   },
@@ -102,19 +102,19 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          console.log("form is:" + JSON.stringify(this.ruleForm));
+          console.log('form is:' + JSON.stringify(this.ruleForm));
           // 指定访问的URL
-          const url = "/community/alpha/student";
+          const url = '/community/alpha/student';
           this.$axios({
             // 指定POST方法
-            method: "POST",
+            method: 'POST',
             // 指定数据格式
-            dataType: "json",
+            dataType: 'json',
             // 指定访问的URL
             url: url,
             // 指定header
             headers: {
-              "Content-Type": "application/json;charset=UTF-8"
+              'Content-Type': 'application/json;charset=UTF-8'
             },
             // 将data中的form存入axios.POST请求的数据节点中
             data: JSON.stringify(this.ruleForm)
@@ -130,8 +130,8 @@ export default {
             });
         } else {
           this.$message({
-            message: "请完善信息",
-            type: "error"
+            message: '请完善信息',
+            type: 'error'
           });
           return false;
         }
@@ -139,20 +139,20 @@ export default {
     },
     SendVerifyCode() {
       const vm = this; // 在axios的then方法中this会失效，此处使用vm保存this指针
-      console.log("send code to " + this.ruleForm.email);
+      console.log('send code to ' + this.ruleForm.email);
       // 指定访问的URL
-      const url = "/community/getVerifyCode";
+      const url = '/community/getVerifyCode';
       this.emailVerify.email = this.ruleForm.email;
       this.$axios({
         // 指定POST方法
-        method: "POST",
+        method: 'POST',
         // 指定数据格式
-        dataType: "json",
+        dataType: 'json',
         // 指定访问的URL
         url: url,
         // 指定header
         headers: {
-          "Content-Type": "application/json;charset=UTF-8"
+          'Content-Type': 'application/json;charset=UTF-8'
         },
         // 将data中的form存入axios.POST请求的数据节点中
         data: JSON.stringify(this.emailVerify)
@@ -162,11 +162,11 @@ export default {
           console.log(res);
           // 将响应res打印出来
           console.log(JSON.stringify(res.data.reason));
-          let status = ""; // 使用status来控制$Message的提示类型
-          if (JSON.stringify(res.data.status) === "1") {
-            status = "error"; // 响应码为1，提示类型为错误
+          let status = ''; // 使用status来控制$Message的提示类型
+          if (JSON.stringify(res.data.status) === '1') {
+            status = 'error'; // 响应码为1，提示类型为错误
           } else {
-            status = "success"; // 响应码为0，提示类型为成功
+            status = 'success'; // 响应码为0，提示类型为成功
           }
           vm.$message({
             message: JSON.stringify(res.data.reason), // 取后台返回的响应信息
@@ -177,7 +177,7 @@ export default {
           console.log(err);
           vm.$message({
             message: err, // 取后台返回的响应信息
-            type: "error" // 指定响应类型
+            type: 'error' // 指定响应类型
           });
         });
     },

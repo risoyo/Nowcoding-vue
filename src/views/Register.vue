@@ -14,11 +14,11 @@
 
 <script>
 // @ is an alias to /src
-import RegisterMain from "@/components/Register/RegisterMain.vue";
-import HeaderMain from "@/components/Common/HeaderMain.vue"
+import RegisterMain from '@/components/Register/RegisterMain.vue';
+import HeaderMain from '@/components/Common/HeaderMain.vue';
 
 export default {
-  name: "register",
+  name: 'Register',
   components: {
     HeaderMain,
     RegisterMain
@@ -26,6 +26,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
