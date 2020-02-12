@@ -161,15 +161,15 @@ export default {
         .then(function(res) {
           console.log(res);
           // 将响应res打印出来
-          console.log(JSON.stringify(res.data.reason));
+          console.log(JSON.stringify(res.data.resp_info));
           let status = ''; // 使用status来控制$Message的提示类型
-          if (JSON.stringify(res.data.status) === '1') {
+          if (JSON.stringify(res.data.resp_code) !== '0') {
             status = 'error'; // 响应码为1，提示类型为错误
           } else {
             status = 'success'; // 响应码为0，提示类型为成功
           }
           vm.$message({
-            message: JSON.stringify(res.data.reason), // 取后台返回的响应信息
+            message: JSON.stringify(res.data.resp_info), // 取后台返回的响应信息
             type: status // 指定响应类型
           });
         })
