@@ -1,30 +1,53 @@
 <template>
   <div>
     <!-- 注册页页头 -->
-    <h1 class="register-header">注册</h1>
+    <h1 class="register-header">
+      注册
+    </h1>
     <el-divider></el-divider>
     <!-- 使用element-ui的表单来实现注册页主体 -->
     <div class="register-form">
-      <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item label="用户名：  ">
-          <el-input v-model="form.name"></el-input>
+      <el-form
+        ref="ruleForm"
+        :model="ruleForm"
+        :rules="rules"
+        status-icon
+        label-width="100px"
+        class="demo-ruleForm"
+      >
+        <el-form-item label="用户名" prop="name">
+          <el-input v-model="ruleForm.name" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="密码：  ">
-          <el-input v-model="form.password"></el-input>
+        <el-form-item label="密码" prop="pass">
+          <el-input
+            v-model="ruleForm.pass"
+            type="password"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="确认密码">
-          <el-input v-model="form.passwordConfirm"></el-input>
+        <el-form-item label="确认密码" prop="checkPass">
+          <el-input
+            v-model="ruleForm.checkPass"
+            type="password"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="邮箱：  ">
-          <el-input v-model="form.email"></el-input>
-          <el-button :plain="true" @click="SendVerifyCode">发送验证码</el-button>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model.number="ruleForm.email"></el-input>
+          <el-button :plain="true" @click="SendVerifyCode">
+            发送验证码
+          </el-button>
         </el-form-item>
-        <el-form-item label="验证码">
-          <el-input v-model="form.verifyCode"></el-input>
+        <el-form-item label="验证码" prop="verifyCode">
+          <el-input v-model.number="ruleForm.verifyCode"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">立即注册</el-button>
-          <el-button>取消</el-button>
+          <el-button @click="submitForm('ruleForm')" type="primary">
+            提交
+          </el-button>
+          <el-button @click="resetForm('ruleForm')">
+            重置
+          </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -34,56 +57,92 @@
 <script>
 export default {
   data() {
-    return {
-      visiable: 0,
-      infos: [],
-      form: {
-        name: '',
-        password: '',
-        passwordConfirm: '',
-        email: '',
-        verifyCode: '',
-      },
-      emailVerify: {
-        email: ''
+    const validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+      } else {
+        if (this.ruleForm.checkPass !== "") {
+          this.$refs.ruleForm.validateField("checkPass");
+        }
+        callback();
       }
-    }
+    };
+    const validatePass2 = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请再次输入密码"));
+      } else if (value !== this.ruleForm.pass) {
+        callback(new Error("两次输入密码不一致!"));
+      } else {
+        callback();
+      }
+    };
+    const checkEmail = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error("请输入邮箱"));
+      } else {
+        callback();
+      }
+    };
+    return {
+      ruleForm: {
+        name: "",
+        pass: "",
+        checkPass: "",
+        email: "",
+        verifyCode: ""
+      },
+      rules: {
+        pass: [{ validator: validatePass, trigger: "blur" }],
+        checkPass: [{ validator: validatePass2, trigger: "blur" }],
+        email: [{ validator: checkEmail, trigger: "blur" }]
+      }
+    };
   },
   methods: {
-    onSubmit() {
-      console.log('submit!');
-      console.log('form is:' + JSON.stringify(this.form));
-      // 指定访问的URL
-      let url = '/community/alpha/student';
-      this.$axios({
-        // 指定POST方法
-        method: "POST",
-        // 指定数据格式
-        dataType: "json",
-        // 指定访问的URL
-        url: url,
-        // 指定header
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8'
-        },
-        // 将data中的form存入axios.POST请求的数据节点中
-        data: JSON.stringify(this.form)
-        // then->接收返回响应
-      }).then(function (res) {
-        console.log(res);
-        // 将响应res打印出来
-        console.log(JSON.stringify(res.data.code));
-        this.infos = resp.data;
-      }).catch(function (err) {
-        console.log(err)
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          console.log("form is:" + JSON.stringify(this.ruleForm));
+          // 指定访问的URL
+          const url = "/community/alpha/student";
+          this.$axios({
+            // 指定POST方法
+            method: "POST",
+            // 指定数据格式
+            dataType: "json",
+            // 指定访问的URL
+            url: url,
+            // 指定header
+            headers: {
+              "Content-Type": "application/json;charset=UTF-8"
+            },
+            // 将data中的form存入axios.POST请求的数据节点中
+            data: JSON.stringify(this.ruleForm)
+            // then->接收返回响应
+          })
+            .then(function(res) {
+              console.log(res);
+              // 将响应res打印出来
+              console.log(JSON.stringify(res.data.code));
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        } else {
+          this.$message({
+            message: "请完善信息",
+            type: "error"
+          });
+          return false;
+        }
       });
     },
     SendVerifyCode() {
-      var vm = this; //在axios的then方法中this会失效，此处使用vm保存this指针
-      console.log("send code to " + this.form.email);
+      const vm = this; // 在axios的then方法中this会失效，此处使用vm保存this指针
+      console.log("send code to " + this.ruleForm.email);
       // 指定访问的URL
-      let url = '/community/getVerifyCode';
-      this.emailVerify.email = this.form.email;
+      const url = "/community/getVerifyCode";
+      this.emailVerify.email = this.ruleForm.email;
       this.$axios({
         // 指定POST方法
         method: "POST",
@@ -93,40 +152,40 @@ export default {
         url: url,
         // 指定header
         headers: {
-          'Content-Type': 'application/json;charset=UTF-8'
+          "Content-Type": "application/json;charset=UTF-8"
         },
         // 将data中的form存入axios.POST请求的数据节点中
         data: JSON.stringify(this.emailVerify)
         // then->接收返回响应
-      }).then(function (res) {
-        console.log(res);
-        // 将响应res打印出来
-        console.log(JSON.stringify(res.data.reason));
-        let status = '';//使用status来控制$Message的提示类型
-        if (JSON.stringify(res.data.status) === '1') {
-          status = 'error'//响应码为1，提示类型为错误
-        }
-        else {
-          status = 'success'//响应码为0，提示类型为成功
-        }
-        vm.$message({
-          message: JSON.stringify(res.data.reason),//取后台返回的响应信息
-          type: status//指定响应类型
-
+      })
+        .then(function(res) {
+          console.log(res);
+          // 将响应res打印出来
+          console.log(JSON.stringify(res.data.reason));
+          let status = ""; // 使用status来控制$Message的提示类型
+          if (JSON.stringify(res.data.status) === "1") {
+            status = "error"; // 响应码为1，提示类型为错误
+          } else {
+            status = "success"; // 响应码为0，提示类型为成功
+          }
+          vm.$message({
+            message: JSON.stringify(res.data.reason), // 取后台返回的响应信息
+            type: status // 指定响应类型
+          });
+        })
+        .catch(function(err) {
+          console.log(err);
+          vm.$message({
+            message: err, // 取后台返回的响应信息
+            type: "error" // 指定响应类型
+          });
         });
-
-      }).catch(function (err) {
-        console.log(err);
-        vm.$message({
-          message: err,//取后台返回的响应信息
-          type: 'error'//指定响应类型
-
-        });
-      });
-
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
     }
-  },
-}
+  }
+};
 </script>
 
 <style lang="scss">
