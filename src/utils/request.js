@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 // import { MessageBox, Message } from "element-ui";
-import Message from "element-ui";
-import router from "../router";
+import message from 'element-ui';
+import router from '../router';
 
 // create an axios instance
 const service = axios.create({
@@ -21,9 +21,9 @@ service.interceptors.request.use(
     //      // please modify it according to the actual situation
     //      config.headers['X-Token'] = getToken()
     //    }
-    config.headers["Content-Type"] = "application/json;charset=UTF-8";
+    config.headers['Content-Type'] = 'application/json;charset=UTF-8';
     // const token = window.sessionStorage.getItem("_token");
-    config.headers["X-ER-UAT"] = "token";
+    config.headers['X-ER-UAT'] = 'token';
     return config;
   },
   error => {
@@ -35,23 +35,13 @@ service.interceptors.request.use(
 
 // response interceptor
 service.interceptors.response.use(
-  /**
-   * If you want to get http information such as headers or status
-   * Please return  response => response
-   */
-
-  /**
-   * Determine the request status by custom code
-   * Here is just an example
-   * You can also judge the status by HTTP Status Code
-   */
   response => {
     const res = response.data;
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 0) {
-      Message({
-        message: res.message || "Error",
-        type: "error",
+      message({
+        message: res.message || 'Error',
+        type: 'error',
         duration: 5 * 1000
       });
 
@@ -68,27 +58,27 @@ service.interceptors.response.use(
       //          })
       //        })
       //      }
-      return Promise.reject(new Error(res.message || "Error"));
+      return Promise.reject(new Error(res.message || 'Error'));
     } else {
       return res;
     }
   },
   error => {
     console.log(error); // for debug
-    let status = error.response.status;
+    const status = error.response.status;
     if (status === 401) {
-      //登录失效 返回登录页面
-      Message({
-        message: "登录失效，请重新登录",
-        type: "warning",
+      // 登录失效 返回登录页面
+      message({
+        message: '登录失效，请重新登录',
+        type: 'warning',
         duration: 5 * 1000
       });
-      router.push("/login");
+      router.push('/login');
       return Promise.reject(error);
     }
-    Message({
+    message({
       message: error.message,
-      type: "error",
+      type: 'error',
       duration: 5 * 1000
     });
     return Promise.reject(error);

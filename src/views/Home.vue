@@ -14,11 +14,11 @@
 
 <script>
 // @ is an alias to /src
-import HomeMain from "@/components/Home/HomeMain.vue";
-import HeaderMain from "@/components/Common/HeaderMain.vue"
+import HomeMain from '@/components/Home/HomeMain.vue';
+import HeaderMain from '@/components/Common/HeaderMain.vue';
 
 export default {
-  name: "app",
+  name: 'App',
   components: {
     HeaderMain,
     HomeMain
@@ -26,7 +26,4 @@ export default {
 };
 </script>
 
-
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
