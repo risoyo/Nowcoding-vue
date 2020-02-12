@@ -12,7 +12,7 @@
       <el-menu-item index="home">
         首页
       </el-menu-item>
-      <el-submenu index="2">
+      <el-submenu index="2" disabled>
         <template slot="title">
           消息
         </template>
@@ -43,7 +43,7 @@
       <el-menu-item index="Register">
         注册
       </el-menu-item>
-      <el-menu-item index="4" disabled>
+      <el-menu-item index="Login">
         登陆
       </el-menu-item>
     </el-menu>
@@ -75,6 +75,9 @@ export default {
       } else if (key === 'home') {
         console.log('home');
         this.$router.push('/');
+      } else if (key === 'Login') {
+        console.log('home');
+        this.$router.push('Login');
       }
     }
   }

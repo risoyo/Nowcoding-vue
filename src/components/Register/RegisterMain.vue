@@ -100,11 +100,12 @@ export default {
   },
   methods: {
     submitForm(formName) {
+      const vm = this; // 在axios的then方法中this会失效，此处使用vm保存this指针
       this.$refs[formName].validate(valid => {
         if (valid) {
           console.log('form is:' + JSON.stringify(this.ruleForm));
           // 指定访问的URL
-          const url = '/community/alpha/student';
+          const url = '/community/userRegist';
           this.$axios({
             // 指定POST方法
             method: 'POST',
@@ -123,10 +124,25 @@ export default {
             .then(function(res) {
               console.log(res);
               // 将响应res打印出来
-              console.log(JSON.stringify(res.data.code));
+              console.log(JSON.stringify(res.data.resp_code));
+              let status = ''; // 使用status来控制$Message的提示类型
+              if (JSON.stringify(res.data.resp_code) !== '"000000"') {
+                status = 'error'; // 响应码为1，提示类型为错误
+              } else {
+                status = 'success'; // 响应码为0，提示类型为成功
+              }
+              vm.$message({
+                message: JSON.stringify(res.data.resp_info), // 取后台返回的响应信息
+                type: status // 指定响应类型
+              });
+              vm.$router.push('Login');
             })
             .catch(function(err) {
               console.log(err);
+              vm.$message({
+                message: err, // 取后台返回的响应信息
+                type: 'error' // 指定响应类型
+              });
             });
         } else {
           this.$message({
