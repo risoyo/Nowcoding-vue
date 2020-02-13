@@ -1,4 +1,4 @@
-let proxyObj = {};
+const proxyObj = {};
 proxyObj["/ws"] = {
   ws: true,
   target: "ws://localhost:8081"

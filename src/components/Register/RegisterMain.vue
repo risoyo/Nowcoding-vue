@@ -158,7 +158,6 @@ export default {
       console.log('send code to ' + this.ruleForm.email);
       // 指定访问的URL
       const url = '/community/getVerifyCode';
-      this.emailVerify.email = this.ruleForm.email;
       this.$axios({
         // 指定POST方法
         method: 'POST',
@@ -171,7 +170,7 @@ export default {
           'Content-Type': 'application/json;charset=UTF-8'
         },
         // 将data中的form存入axios.POST请求的数据节点中
-        data: JSON.stringify(this.emailVerify)
+        data: JSON.stringify(this.ruleForm)
         // then->接收返回响应
       })
         .then(function(res) {
@@ -179,7 +178,7 @@ export default {
           // 将响应res打印出来
           console.log(JSON.stringify(res.data.resp_info));
           let status = ''; // 使用status来控制$Message的提示类型
-          if (JSON.stringify(res.data.resp_code) !== '0') {
+          if (JSON.stringify(res.data.resp_code) !== '000000') {
             status = 'error'; // 响应码为1，提示类型为错误
           } else {
             status = 'success'; // 响应码为0，提示类型为成功
