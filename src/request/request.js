@@ -16,7 +16,6 @@ axios.defaults.timeout = 10000;
 axios.defaults.headers.post['Content-Type'] =
   'application/x-www-form-urlencoded;charset=UTF-8';
 
-// 请求拦截
 // 请求拦截器
 axios.interceptors.request.use(
   config => {
