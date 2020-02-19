@@ -2,7 +2,7 @@
 <template>
   <div class="hello">
     <el-tabs v-model="activeName" @tab-click="handleClick" type="card">
-      <el-tab-pane label="最新" name="first">
+      <el-tab-pane v-loading="loading" label="最新" name="first">
         <h3>当前页码 is {{ totalPageNumber }}</h3>
 
         <!-- 使用v-for读取infos中的数据 -->
@@ -54,6 +54,7 @@ export default {
       totalPageNumber: 0,
       maxRowsPerPage: 10,
       activeName: 'first',
+      loading: true,
       infos: []
     };
   },
