@@ -25,10 +25,17 @@ import { service } from './Service';
 // }
 /**
  * @description 获取首页的帖子集合
- * @param {String} url 首页的URL，包括了指向页数和每页最大行数
- * @return {Set} 帖子集合的set
+ * @param {String} PageNumber 指向首页的页数
+ * @param {String} maxRowsPerPage 首页每页显示的行数
+ * @return {Object} 帖子集合的set
  */
-export function getHomePosts(url) {
+export function getHomePosts(PageNumber, maxRowsPerPage) {
+  const url =
+    '/community/getIndexPost?currentPageNumber=' +
+    PageNumber +
+    '&maxRowsPerPage' +
+    maxRowsPerPage;
+  console.log(`url to: ${url}`);
   return service({
     url: url,
     method: 'GET'

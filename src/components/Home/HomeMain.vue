@@ -45,7 +45,7 @@
 </template>
 
 <script>
-// import { getHomePosts } from '@/utils/request.js';
+import { getHomePosts } from '@/utils/request.js';
 export default {
   data() {
     return {
@@ -70,35 +70,22 @@ export default {
   },
   methods: {
     handleUrlChange(PageNumber) {
-      const url =
-        '/community/getIndexPost?currentPageNumber=' +
-        PageNumber +
-        '&maxRowsPerPage' +
-        this.maxRowsPerPage;
-      console.log(`url to: ${url}`);
-      this.$axios
-        // 不添加http等前缀，前缀由vue.config.js来补充，实现请求转发
-        .get(url)
-        .then(resp => {
-          if (resp) {
-            // 将resp中的data数据存入infos
-            this.infos = resp.data;
-            console.log('resp' + JSON.stringify(resp));
-            console.log('resp.data' + JSON.stringify(resp.data));
-            // totalPageNumber数据由后台传过来，页面上直接获取的话会报错，故使用计算属性来完成
-            this.totalPageNumber = this.getPageNumber;
-          }
-        });
-      // getHomePosts(url).then(resp => {
-      //   if (resp) {
-      //     // 将resp中的data数据存入infos
-      //     this.infos = resp.data;
-      //     console.log('resp' + JSON.stringify(resp));
-      //     console.log('resp.data' + JSON.stringify(resp.data));
-      //     // totalPageNumber数据由后台传过来，页面上直接获取的话会报错，故使用计算属性来完成
-      //     this.totalPageNumber = this.getPageNumber;
-      //   }
-      // });
+      /**
+       * @description 获取首页的帖子集合,调用封装在request中的函数
+       * @param {String} PageNumber 首页的页数
+       * @param {String} maxRowsPerPage 首页每页显示的行数
+       * @return {Object} resp.data为帖子集合的set
+       */
+      getHomePosts(PageNumber, this.maxRowsPerPage).then(resp => {
+        if (resp) {
+          // 将resp中的data数据存入infos
+          this.infos = resp.data;
+          console.log('resp' + JSON.stringify(resp));
+          console.log('resp.data' + JSON.stringify(resp.data));
+          // totalPageNumber数据由后台传过来，页面上直接获取的话会报错，故使用计算属性来完成
+          this.totalPageNumber = this.getPageNumber;
+        }
+      });
     },
     handleClick(tab, event) {
       console.log(tab, event);
