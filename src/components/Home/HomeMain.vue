@@ -71,7 +71,7 @@ export default {
   methods: {
     handleUrlChange(PageNumber) {
       /**
-       * @description 获取首页的帖子集合,调用封装在request中的函数
+       * @description 获取首页的帖子集合
        * @param {String} PageNumber 首页的页数
        * @param {String} maxRowsPerPage 首页每页显示的行数
        * @return {Object} resp.data为帖子集合的set
