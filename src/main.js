@@ -1,14 +1,12 @@
 import Vue from 'vue';
-import service from '@/utils/request';
+import { service } from '@/utils/Service.js';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 import Vuex from 'vuex';
 import './plugins/element.js';
-import axios from 'axios';
 Vue.config.productionTip = false;
-Vue.prototype.axios = service;
-Vue.prototype.$axios = axios;
+Vue.prototype.$axios = service;
 new Vue({
   router,
   store,

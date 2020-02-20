@@ -1,8 +1,7 @@
-/* eslint-disable prettier/prettier */ /* eslint-disable prettier/prettier */
 <template>
   <div class="hello">
     <el-tabs v-model="activeName" @tab-click="handleClick" type="card">
-      <el-tab-pane v-loading="loading" label="最新" name="first">
+      <el-tab-pane label="最新" name="first">
         <h3>当前页码 is {{ totalPageNumber }}</h3>
 
         <!-- 使用v-for读取infos中的数据 -->
@@ -46,6 +45,7 @@
 </template>
 
 <script>
+// import { getHomePosts } from '@/utils/request.js';
 export default {
   data() {
     return {
@@ -54,7 +54,7 @@ export default {
       totalPageNumber: 0,
       maxRowsPerPage: 10,
       activeName: 'first',
-      loading: true,
+      // loading: true,
       infos: []
     };
   },
@@ -83,10 +83,22 @@ export default {
           if (resp) {
             // 将resp中的data数据存入infos
             this.infos = resp.data;
+            console.log('resp' + JSON.stringify(resp));
+            console.log('resp.data' + JSON.stringify(resp.data));
             // totalPageNumber数据由后台传过来，页面上直接获取的话会报错，故使用计算属性来完成
             this.totalPageNumber = this.getPageNumber;
           }
         });
+      // getHomePosts(url).then(resp => {
+      //   if (resp) {
+      //     // 将resp中的data数据存入infos
+      //     this.infos = resp.data;
+      //     console.log('resp' + JSON.stringify(resp));
+      //     console.log('resp.data' + JSON.stringify(resp.data));
+      //     // totalPageNumber数据由后台传过来，页面上直接获取的话会报错，故使用计算属性来完成
+      //     this.totalPageNumber = this.getPageNumber;
+      //   }
+      // });
     },
     handleClick(tab, event) {
       console.log(tab, event);
