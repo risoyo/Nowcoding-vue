@@ -15,7 +15,7 @@ const actions = {
   actionsAddCount(context, n = 0) {
     console.log(context);
     return context.commit('mutationsAddCount', n);
-  }
+  } // 使用mutation使count自增
 };
 
 const getters = {
