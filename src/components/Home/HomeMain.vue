@@ -81,7 +81,6 @@ export default {
           // 将resp中的data数据存入infos
           this.infos = resp.data;
           console.log('resp' + JSON.stringify(resp));
-          console.log('resp.data' + JSON.stringify(resp.data));
           // totalPageNumber数据由后台传过来，页面上直接获取的话会报错，故使用计算属性来完成
           this.totalPageNumber = this.getPageNumber;
         }
