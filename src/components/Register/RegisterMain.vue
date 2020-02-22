@@ -107,33 +107,18 @@ export default {
           // 指定访问的URL
           const url = '/community/userRegist';
           this.post(url, this.ruleForm)
-            // this.$axios({
-            //   // 指定POST方法
-            //   method: 'POST',
-            //   // 指定数据格式
-            //   dataType: 'json',
-            //   // 指定访问的URL
-            //   url: url,
-            //   // 指定header
-            //   headers: {
-            //     'Content-Type': 'application/json;charset=UTF-8'
-            //   },
-            //   // 将data中的form存入axios.POST请求的数据节点中
-            //   data: JSON.stringify(this.ruleForm)
-            //   // then->接收返回响应
-            // })
             .then(function(res) {
               console.log(res);
               // 将响应res打印出来
-              console.log(JSON.stringify(res.data.resp_code));
+              console.log(JSON.stringify(res.respCode));
               let status = ''; // 使用status来控制$Message的提示类型
-              if (JSON.stringify(res.data.resp_code) !== '"000000"') {
+              if (res.respCode !== '000000') {
                 status = 'error'; // 响应码为1，提示类型为错误
               } else {
                 status = 'success'; // 响应码为0，提示类型为成功
               }
               vm.$message({
-                message: JSON.stringify(res.data.resp_info), // 取后台返回的响应信息
+                message: JSON.stringify(res.respInfo), // 取后台返回的响应信息
                 type: status // 指定响应类型
               });
               vm.$router.push('Login');
@@ -159,21 +144,7 @@ export default {
       console.log('send code to ' + this.ruleForm.email);
       // 指定访问的URL
       const url = '/community/getVerifyCode';
-      this.$axios({
-        // 指定POST方法
-        method: 'POST',
-        // 指定数据格式
-        dataType: 'json',
-        // 指定访问的URL
-        url: url,
-        // 指定header
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8'
-        },
-        // 将data中的form存入axios.POST请求的数据节点中
-        data: JSON.stringify(this.ruleForm)
-        // then->接收返回响应
-      })
+      this.post(url, this.ruleForm)
         .then(function(res) {
           console.log(res);
           // 将响应res打印出来
