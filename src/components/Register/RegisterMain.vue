@@ -108,28 +108,10 @@ export default {
           const url = '/community/userRegist';
           this.post(url, this.ruleForm)
             .then(function(res) {
-              console.log(res);
-              // 将响应res打印出来
-              console.log(JSON.stringify(res.respCode));
-              let status = ''; // 使用status来控制$Message的提示类型
-              if (res.respCode !== '000000') {
-                status = 'error'; // 响应码为1，提示类型为错误
-              } else {
-                status = 'success'; // 响应码为0，提示类型为成功
-              }
-              vm.$message({
-                message: JSON.stringify(res.respInfo), // 取后台返回的响应信息
-                type: status // 指定响应类型
-              });
+              console.log(res); // 将响应res打印出来
               vm.$router.push('Login');
             })
-            .catch(function(err) {
-              console.log(err);
-              vm.$message({
-                message: err, // 取后台返回的响应信息
-                type: 'error' // 指定响应类型
-              });
-            });
+            .catch(() => console.log('promise catch err')); // 捕获异常;
         } else {
           this.$message({
             message: '请完善信息',
@@ -140,34 +122,10 @@ export default {
       });
     },
     handVerifyClick() {
-      const vm = this; // 在axios的then方法中this会失效，此处使用vm保存this指针
       console.log('send code to ' + this.ruleForm.email);
       // 指定访问的URL
       const url = '/community/getVerifyCode';
-      this.post(url, this.ruleForm)
-        .then(function(res) {
-          console.log(res);
-          // 将响应res打印出来
-          console.log(JSON.stringify(res.respInfo));
-          console.log(JSON.stringify(res.respCode));
-          let status = ''; // 使用status来控制$Message的提示类型
-          if (res.respCode !== '000000') {
-            status = 'error'; // 响应码为1，提示类型为错误
-          } else {
-            status = 'success'; // 响应码为0，提示类型为成功
-          }
-          vm.$message({
-            message: JSON.stringify(res.respInfo), // 取后台返回的响应信息
-            type: status // 指定响应类型
-          });
-        })
-        .catch(function(err) {
-          console.log(err);
-          vm.$message({
-            message: err, // 取后台返回的响应信息
-            type: 'error' // 指定响应类型
-          });
-        });
+      this.post(url, this.ruleForm);
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();

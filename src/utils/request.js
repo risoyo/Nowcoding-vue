@@ -1,6 +1,6 @@
 import { service } from './Service';
+import { Message } from 'element-ui';
 // import axios from 'axios';
-// import qs from 'qs';
 // export function getConfigsByProductId(productId) {
 //   return Service({
 //     url: '/manager/getConfigsByProductId',
@@ -53,6 +53,14 @@ export function get(url) {
   });
 }
 
+// export function post(url, data) {
+//   return service({
+//     method: 'POST',
+//     dataType: 'json',
+//     url: url,
+//     data: JSON.stringify(data)
+//   });
+// }
 /**
  * @description 通用的POST方法
  * @param {String} url 请求的URL
@@ -60,10 +68,32 @@ export function get(url) {
  * @return {Object} 应答数据
  */
 export function post(url, data) {
-  return service({
-    method: 'POST',
-    dataType: 'json',
-    url: url,
-    data: JSON.stringify(data)
+  return new Promise((resolve, reject) => {
+    service({
+      method: 'POST',
+      dataType: 'json',
+      url: url,
+      data: JSON.stringify(data)
+    }).then(res => {
+      if (res.respCode === '000000') {
+        // eslint-disable-next-line new-cap
+        Message({
+          message: res.respInfo, // 取后台返回的响应信息
+          type: 'success',
+          duration: 5 * 1000
+        });
+      } else {
+        reject(res.respInfo);
+      }
+      resolve(res.data);
+    });
+  }).catch(err => {
+    // eslint-disable-next-line new-cap
+    Message({
+      showClose: true,
+      message: err,
+      type: 'error',
+      duration: 1000
+    });
   });
 }
