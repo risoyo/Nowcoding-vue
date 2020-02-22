@@ -15,7 +15,8 @@ export const service = axios.create({
 service.interceptors.request.use(config => {
   loadingInstance = Loading.service({
     lock: true,
-    text: 'loading...'
+    text: 'loading...',
+    target: document.querySelector('.loadingtext') // 设置遮罩目标：class为"loadingtext"的类
   });
   return config;
 });

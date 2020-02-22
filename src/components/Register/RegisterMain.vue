@@ -34,7 +34,7 @@
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
           <el-input v-model.number="ruleForm.email"></el-input>
-          <el-button :plain="true" @click="SendVerifyCode">
+          <el-button :plain="true" @click="handVerifyClick">
             发送验证码
           </el-button>
         </el-form-item>
@@ -153,7 +153,7 @@ export default {
         }
       });
     },
-    SendVerifyCode() {
+    handVerifyClick() {
       const vm = this; // 在axios的then方法中this会失效，此处使用vm保存this指针
       console.log('send code to ' + this.ruleForm.email);
       // 指定访问的URL

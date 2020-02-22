@@ -1,4 +1,6 @@
 import { service } from './Service';
+// import axios from 'axios';
+// import qs from 'qs';
 // export function getConfigsByProductId(productId) {
 //   return Service({
 //     url: '/manager/getConfigsByProductId',
@@ -14,47 +16,63 @@ import { service } from './Service';
 
 // /**
 //  * @description 获取首页的帖子集合
-//  * @param {String} PageNumber 指向首页的页数
-//  * @param {String} maxRowsPerPage 首页每页显示的行数
+//  * @param {String} url 指向首页的页数
+//  * @param {String} params 指向首页的页数
 //  * @return {Object} 帖子集合的set
 //  */
-// export function getHomePosts(PageNumber, maxRowsPerPage) {
-//   console.log(`url to: ${url}`);
+// export function get(url, params) {
+//   return new Promise((resolve, reject) => {
+//     axios
+//       .get(url, {
+//         params: params
+//       })
+//       .then(res => {
+//         resolve(res.data);
+//       })
+//       .catch(err => {
+//         reject(err.data);
+//       });
+//   });
+// }
+
+// export function get(url) {
 //   return service({
 //     url: url,
 //     method: 'GET'
 //   });
 // }
-
 /**
- * @description 获取首页的帖子集合
- * @param {String} PageNumber 指向首页的页数
- * @param {String} maxRowsPerPage 首页每页显示的行数
- * @return {Object} 帖子集合的set
+ * @description 通用GET方法
+ * @param {String} url 请求的URL
+ *  @param {String} params 请求的URL
+ * @return {Object} 应答数据
  */
-export function getHomePosts(PageNumber, maxRowsPerPage) {
-  const url =
-    '/community/getIndexPost?currentPageNumber=' +
-    PageNumber +
-    '&maxRowsPerPage' +
-    maxRowsPerPage;
-  console.log(`url to: ${url}`);
-  return service({
-    url: url,
-    method: 'GET'
+export function get(url, params) {
+  return new Promise((resolve, reject) => {
+    service
+      .get(url, {
+        params: params
+      })
+      .then(res => {
+        resolve(res);
+      })
+      .catch(err => {
+        reject(err);
+      });
   });
 }
 
 /**
- * @description 获取首页的帖子集合
- * @param {set} registData 注册数据的集合
- * @return {Object} 帖子集合的set
+ * @description 通用的POST方法
+ * @param {String} url 请求的URL
+ * @param {String} data 请求的发送数据
+ * @return {Object} 应答数据
  */
-export function registUser(registData) {
+export function post(url, data) {
   return service({
-    url: '/community/userRegist',
-    dataType: 'json',
     method: 'POST',
-    data: JSON.stringify(registData)
+    dataType: 'json',
+    url: url,
+    data: JSON.stringify(data)
   });
 }
