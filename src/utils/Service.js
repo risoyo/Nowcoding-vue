@@ -24,7 +24,7 @@ service.interceptors.response.use(
   response => {
     loadingInstance.close();
     // console.log(response)
-    return response; // 返回response,此处返回response.data的话就是仅返回data节点
+    return response.data; // 返回response,此处返回response.data的话就是仅返回data节点
   },
   error => {
     console.log('TCL: error', error);
