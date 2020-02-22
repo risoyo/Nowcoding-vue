@@ -44,21 +44,12 @@ import { service } from './Service';
 /**
  * @description 通用GET方法
  * @param {String} url 请求的URL
- *  @param {String} params 请求的URL
  * @return {Object} 应答数据
  */
-export function get(url, params) {
-  return new Promise((resolve, reject) => {
-    service
-      .get(url, {
-        params: params
-      })
-      .then(res => {
-        resolve(res);
-      })
-      .catch(err => {
-        reject(err);
-      });
+export function get(url) {
+  return service({
+    url: url,
+    method: 'GET'
   });
 }
 

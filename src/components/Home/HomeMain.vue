@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import { get } from '@/utils/request.js';
 export default {
   data() {
     return {
@@ -66,7 +65,7 @@ export default {
         PageNumber +
         '&maxRowsPerPage=' +
         this.maxRowsPerPage;
-      get(url)
+      this.get(url)
         .then(resp => {
           // 将resp中的data数据存入infos
           this.infos = resp.data;
