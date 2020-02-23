@@ -82,6 +82,6 @@ export function post(url, data) {
       type: 'error',
       duration: 1000
     });
-    return Promise.reject(err);
+    return Promise.reject(err); // 返回一个Promise.reject对象，使下一层能够catch
   });
 }

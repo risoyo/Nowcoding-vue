@@ -103,15 +103,15 @@ export default {
       const vm = this; // 在axios的then方法中this会失效，此处使用vm保存this指针
       this.$refs[formName].validate(valid => {
         if (valid) {
-          console.log('form is:' + JSON.stringify(this.ruleForm));
-          // 指定访问的URL
-          const url = '/community/userRegist';
+          // 检查form的字段是否符合要求
+          const url = '/community/userRegist'; // 指定访问的URL
           this.post(url, this.ruleForm)
             .then(res => {
               console.log('响应res为' + res); // 将响应res打印出来
-              vm.$router.push('Login');
+              vm.$router.push('Login'); // 后台响应为成功时，导航至登陆页面
             })
             .catch(e => {
+              // 当POST请求返回了Promise.reject对象时，捕获异常
               console.log('Vue POST error catched :' + e);
             });
         } else {
