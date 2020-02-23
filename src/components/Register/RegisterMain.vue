@@ -139,7 +139,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .register-header {
   text-align: center;
   font-size: 30px;

@@ -16,7 +16,7 @@ service.interceptors.request.use(config => {
   loadingInstance = Loading.service({
     lock: true,
     text: 'loading...',
-    target: document.querySelector('.loadingtext') // 设置遮罩目标：class为"loadingtext"的类
+    target: document.querySelector('.loadingtext') // 设置遮罩目标：class为"loadingtext"的类，注意，如果使用了该类，在Style中必须添加Scoped，否则其样式会作用于所有使用了该class的元素
   });
   return config;
 });
