@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { service } from '@/utils/Service.js';
-import { get, post } from '@/utils/request.js';
+import { get, post, getService, postService } from '@/utils/request.js';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -10,6 +10,8 @@ Vue.config.productionTip = false;
 Vue.prototype.$axios = service;
 Vue.prototype.get = get;
 Vue.prototype.post = post;
+Vue.prototype.getService = getService;
+Vue.prototype.postService = postService;
 new Vue({
   router,
   store,

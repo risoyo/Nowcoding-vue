@@ -127,7 +127,10 @@ export default {
       console.log('send code to ' + this.ruleForm.email);
       // 指定访问的URL
       const url = '/community/getVerifyCode';
-      this.post(url, this.ruleForm);
+      this.post(url, this.ruleForm).catch(e => {
+        // 当POST请求返回了Promise.reject对象时，捕获异常
+        console.log('Vue POST error catched :' + e);
+      });
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();

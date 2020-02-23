@@ -1,21 +1,31 @@
 import { service } from './Service';
 import { Message } from 'element-ui';
+/**
+ * @description 通用不带响应处理的GET方法
+ * @param {String} url 请求的URL
+ * @return {Object} 应答数据
+ */
+export function getService(url) {
+  return service({
+    url: url,
+    method: 'GET'
+  });
+}
 
-// export function get(url) {
-//   return service({
-//     url: url,
-//     method: 'GET'
-//   });
-// }
-
-// export function post(url, data) {
-//   return service({
-//     method: 'POST',
-//     dataType: 'json',
-//     url: url,
-//     data: JSON.stringify(data)
-//   });
-// }
+/**
+ * @description 通用不带响应处理的POST方法
+ * @param {String} url 请求的URL
+ * @param {String} data 请求的data
+ * @return {Object} 应答数据
+ */
+export function postService(url, data) {
+  return service({
+    method: 'POST',
+    dataType: 'json',
+    url: url,
+    data: JSON.stringify(data)
+  });
+}
 
 /**
  * @description 通用GET方法，会在获得响应数据时判断响应码是否为000000，若非000000抛异常
@@ -43,6 +53,7 @@ export function get(url) {
       type: 'error',
       duration: 1000
     });
+    return Promise.reject(err); // 返回一个Promise.reject对象，使下一层能够catch
   });
 }
 

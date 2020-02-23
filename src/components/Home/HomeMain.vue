@@ -74,7 +74,8 @@ export default {
           console.log('totalPageNumber' + this.totalPageNumber);
         })
         .catch(err => {
-          console.log(err);
+          // 当GET请求返回了Promise.reject对象时，捕获异常
+          console.log('Vue GET error catched :' + err);
         });
     },
     handleClick(tab, event) {
