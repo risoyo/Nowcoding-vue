@@ -62,7 +62,7 @@ export default {
       console.log('form is:' + JSON.stringify(this.ruleForm));
       // 指定访问的URL
       const url = '/community/Login';
-      // TODO: 改写login的POST方法，并获取token，将token存入vuex中，在请求时默认附带token到后台校验，token失效时要求重新登陆
+      // TODO: 改写login的POST方法，并获取token，将token存入vuex？cookie中，在请求时默认附带token到后台校验，token失效时要求重新登陆
       this.$axios({
         // 指定POST方法
         method: 'POST',
