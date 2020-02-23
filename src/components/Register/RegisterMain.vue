@@ -16,20 +16,20 @@
         class="demo-ruleForm"
       >
         <el-form-item label="用户名" prop="name">
-          <el-input v-model="ruleForm.name" autocomplete="off"></el-input>
+          <el-input v-model="ruleForm.name" autocomplete="on"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="pass">
           <el-input
             v-model="ruleForm.pass"
             type="password"
-            autocomplete="off"
+            autocomplete="on"
           ></el-input>
         </el-form-item>
         <el-form-item label="确认密码" prop="checkPass">
           <el-input
             v-model="ruleForm.checkPass"
             type="password"
-            autocomplete="off"
+            autocomplete="on"
           ></el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
@@ -107,11 +107,13 @@ export default {
           // 指定访问的URL
           const url = '/community/userRegist';
           this.post(url, this.ruleForm)
-            .then(function(res) {
-              console.log(res); // 将响应res打印出来
+            .then(res => {
+              console.log('响应res为' + res); // 将响应res打印出来
               vm.$router.push('Login');
             })
-            .catch(() => console.log('promise catch err')); // 捕获异常;
+            .catch(e => {
+              console.log('Vue POST error catched :' + e);
+            });
         } else {
           this.$message({
             message: '请完善信息',

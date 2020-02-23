@@ -1,39 +1,5 @@
 import { service } from './Service';
 import { Message } from 'element-ui';
-// import axios from 'axios';
-// export function getConfigsByProductId(productId) {
-//   return Service({
-//     url: '/manager/getConfigsByProductId',
-//     params: { productId: productId }
-//   });
-// }
-// export function getAllAndroidPlugins() {
-//   return Service({
-//     url: '/manager/getAndroidPlugin ',
-//     method: 'get'
-//   });
-// }
-
-// /**
-//  * @description 获取首页的帖子集合
-//  * @param {String} url 指向首页的页数
-//  * @param {String} params 指向首页的页数
-//  * @return {Object} 帖子集合的set
-//  */
-// export function get(url, params) {
-//   return new Promise((resolve, reject) => {
-//     axios
-//       .get(url, {
-//         params: params
-//       })
-//       .then(res => {
-//         resolve(res.data);
-//       })
-//       .catch(err => {
-//         reject(err.data);
-//       });
-//   });
-// }
 
 // export function get(url) {
 //   return service({
@@ -41,17 +7,6 @@ import { Message } from 'element-ui';
 //     method: 'GET'
 //   });
 // }
-/**
- * @description 通用GET方法
- * @param {String} url 请求的URL
- * @return {Object} 应答数据
- */
-export function get(url) {
-  return service({
-    url: url,
-    method: 'GET'
-  });
-}
 
 // export function post(url, data) {
 //   return service({
@@ -61,8 +16,38 @@ export function get(url) {
 //     data: JSON.stringify(data)
 //   });
 // }
+
 /**
- * @description 通用的POST方法
+ * @description 通用GET方法，会在获得响应数据时判断响应码是否为000000，若非000000抛异常
+ * @param {String} url 请求的URL
+ * @return {Object} 应答数据
+ */
+export function get(url) {
+  return new Promise((resolve, reject) => {
+    service({
+      method: 'GET',
+      url: url
+    }).then(res => {
+      if (res.respCode !== '000000') {
+        reject(res.respInfo); // 抛出异常，传递信息为后台返回数据的respInfo节点
+      }
+      resolve(res); // 将后台返回的数据传递到下一层
+    });
+  }).catch(err => {
+    // 捕获异常
+    // eslint-disable-next-line new-cap
+    Message({
+      // 调用element的Message方法弹窗提示错误信息
+      showClose: true,
+      message: err,
+      type: 'error',
+      duration: 1000
+    });
+  });
+}
+
+/**
+ * @description 通用的POST方法，会在获得响应数据时判断响应码是否为000000，若非000000抛异常
  * @param {String} url 请求的URL
  * @param {String} data 请求的发送数据
  * @return {Object} 应答数据
@@ -80,20 +65,23 @@ export function post(url, data) {
         Message({
           message: res.respInfo, // 取后台返回的响应信息
           type: 'success',
-          duration: 5 * 1000
+          duration: 1000
         });
+        resolve(res); // 将后台返回的数据传递到下一层
       } else {
-        reject(res.respInfo);
+        reject(res.respInfo); // 抛出异常，传递信息为后台返回数据的respInfo节点
       }
-      resolve(res.data);
     });
   }).catch(err => {
+    // 捕获异常
     // eslint-disable-next-line new-cap
     Message({
+      // 调用element的Message方法弹窗提示错误信息
       showClose: true,
       message: err,
       type: 'error',
       duration: 1000
     });
+    return Promise.reject(err);
   });
 }
