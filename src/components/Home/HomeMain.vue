@@ -2,39 +2,40 @@
   <div class="hello">
     <el-tabs v-model="activeName" @tab-click="handleClick" type="card">
       <!-- 将class设置为loadingtext，遮罩本节点 -->
-      <el-tab-pane label="最新" name="first" class="loadingtext">
-        <h3>当前页码 is {{ totalPageNumber }}</h3>
+      <div class="loadingtext">
+        <el-tab-pane label="最新" name="first">
+          <h3>当前页码 is {{ totalPageNumber }}</h3>
 
-        <!-- 使用v-for读取infos中的数据 -->
+          <!-- 使用v-for读取infos中的数据 -->
 
-        <div v-for="(info, i) in infos" :key="i">
-          <div>
-            <p>{{ info.content }}</p>
-            <p>
-              <span>{{ info.user_name }}</span>
-              <el-divider direction="vertical"></el-divider>
-              <span style="padding-left:250px">
-                发布于：{{ info.create_time }}
-              </span>
-              <el-divider direction="vertical"></el-divider>
-              <span>回帖：{{ info.comment_count }}</span>
-            </p>
+          <div v-for="(info, i) in infos" :key="i">
+            <div>
+              <p>{{ info.content }}</p>
+              <p>
+                <span>{{ info.user_name }}</span>
+                <el-divider direction="vertical"></el-divider>
+                <span style="padding-left:250px">
+                  发布于：{{ info.create_time }}
+                </span>
+                <el-divider direction="vertical"></el-divider>
+                <span>回帖：{{ info.comment_count }}</span>
+              </p>
+            </div>
+            <el-divider></el-divider>
           </div>
-          <el-divider></el-divider>
-        </div>
 
-        <div style="text-align: center;">
-          <el-pagination
-            @current-change="handleCurrentChange"
-            :size="maxRowsPerPage"
-            :total="totalPageNumber"
-            :current-page="currentPageNumber"
-            layout="prev, pager, next"
-          >
-          </el-pagination>
-        </div>
-      </el-tab-pane>
-
+          <div style="text-align: center;">
+            <el-pagination
+              @current-change="handleCurrentChange"
+              :size="maxRowsPerPage"
+              :total="totalPageNumber"
+              :current-page="currentPageNumber"
+              layout="prev, pager, next"
+            >
+            </el-pagination>
+          </div>
+        </el-tab-pane>
+      </div>
       <el-tab-pane label="最热" name="second">
         最热
       </el-tab-pane>

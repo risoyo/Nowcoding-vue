@@ -14,9 +14,10 @@ export const service = axios.create({
 // 添加请求拦截器
 service.interceptors.request.use(config => {
   loadingInstance = Loading.service({
-    lock: true,
     text: 'loading...',
-    target: document.querySelector('.loadingtext') // 设置遮罩目标：class为"loadingtext"的类，注意，如果使用了该类，在Style中必须添加Scoped，否则其样式会作用于所有使用了该class的元素
+    target: document.querySelector('.loadingtext')
+    // 设置遮罩目标：class为"loadingtext"的类，使用规约：必须在需要遮罩的元素外单独添加一个div，将需要遮罩的元素完全包裹
+    // 不可为了省事直接将现有元素的class设置为loadingtext，不可对loadingtext类的样式进行更改
   });
   return config;
 });

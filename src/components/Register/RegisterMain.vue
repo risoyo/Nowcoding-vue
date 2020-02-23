@@ -7,49 +7,51 @@
     <el-divider></el-divider>
     <!-- 使用element-ui的表单来实现注册页主体 -->
     <div class="loadingtext">
-      <el-form
-        ref="ruleForm"
-        :model="ruleForm"
-        :rules="rules"
-        status-icon
-        label-width="100px"
-        class="demo-ruleForm"
-      >
-        <el-form-item label="用户名" prop="name">
-          <el-input v-model="ruleForm.name" autocomplete="on"></el-input>
-        </el-form-item>
-        <el-form-item label="密码" prop="pass">
-          <el-input
-            v-model="ruleForm.pass"
-            type="password"
-            autocomplete="on"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="确认密码" prop="checkPass">
-          <el-input
-            v-model="ruleForm.checkPass"
-            type="password"
-            autocomplete="on"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model.number="ruleForm.email"></el-input>
-          <el-button :plain="true" @click="handVerifyClick">
-            发送验证码
-          </el-button>
-        </el-form-item>
-        <el-form-item label="验证码" prop="verifyCode">
-          <el-input v-model.number="ruleForm.verifyCode"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button @click="submitForm('ruleForm')" type="primary">
-            提交
-          </el-button>
-          <el-button @click="resetForm('ruleForm')">
-            重置
-          </el-button>
-        </el-form-item>
-      </el-form>
+      <div class="el-form-style">
+        <el-form
+          ref="ruleForm"
+          :model="ruleForm"
+          :rules="rules"
+          status-icon
+          label-width="100px"
+          class="demo-ruleForm"
+        >
+          <el-form-item label="用户名" prop="name">
+            <el-input v-model="ruleForm.name" autocomplete="on"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="pass">
+            <el-input
+              v-model="ruleForm.pass"
+              type="password"
+              autocomplete="on"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="确认密码" prop="checkPass">
+            <el-input
+              v-model="ruleForm.checkPass"
+              type="password"
+              autocomplete="on"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="邮箱" prop="email">
+            <el-input v-model.number="ruleForm.email"></el-input>
+            <el-button :plain="true" @click="handVerifyClick">
+              发送验证码
+            </el-button>
+          </el-form-item>
+          <el-form-item label="验证码" prop="verifyCode">
+            <el-input v-model.number="ruleForm.verifyCode"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button @click="submitForm('ruleForm')" type="primary">
+              提交
+            </el-button>
+            <el-button @click="resetForm('ruleForm')">
+              重置
+            </el-button>
+          </el-form-item>
+        </el-form>
+      </div>
     </div>
   </div>
 </template>
@@ -145,7 +147,7 @@ export default {
   font-size: 30px;
   color: rgb(48, 214, 214);
 }
-.loadingtext {
+.el-form-style {
   padding-left: 350px;
   padding-right: 350px;
 }
