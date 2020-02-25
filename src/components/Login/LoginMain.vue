@@ -63,43 +63,16 @@ export default {
       // 指定访问的URL
       const url = '/community/Login';
       // TODO: 改写login的POST方法，并获取token，将token存入vuex？cookie中，在请求时默认附带token到后台校验，token失效时要求重新登陆
-      this.$axios({
-        // 指定POST方法
-        method: 'POST',
-        // 指定数据格式
-        dataType: 'json',
-        // 指定访问的URL
-        url: url,
-        // 指定header
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8'
-        },
-        // 将data中的form存入axios.POST请求的数据节点中
-        data: JSON.stringify(this.ruleForm)
-        // then->接收返回响应
-      })
+      this.post(url, this.ruleForm)
         .then(function(res) {
           console.log(res);
           // 将响应res打印出来
-          console.log(JSON.stringify(res.data.resp_code));
-          let status = ''; // 使用status来控制$Message的提示类型
-          if (JSON.stringify(res.data.resp_code) !== '"000000"') {
-            status = 'error'; // 响应码为1，提示类型为错误
-          } else {
-            status = 'success'; // 响应码为0，提示类型为成功
-          }
-          vm.$message({
-            message: JSON.stringify(res.data.resp_info), // 取后台返回的响应信息
-            type: status // 指定响应类型
-          });
-          vm.$router.push('/');
+          console.log('响应res为' + res); // 将响应res打印出来
+          vm.$router.push('/'); // 后台响应为成功时，导航至主页
         })
-        .catch(function(err) {
-          console.log(err);
-          vm.$message({
-            message: err, // 取后台返回的响应信息
-            type: 'error' // 指定响应类型
-          });
+        .catch(e => {
+          // 当POST请求返回了Promise.reject对象时，捕获异常
+          console.log('Vue POST error catched :' + e);
         });
     },
     resetForm(formName) {
