@@ -50,7 +50,7 @@ export default {
       // 声明使用的数组
       currentPageNumber: 1,
       totalPageNumber: 0,
-      maxRowsPerPage: 1,
+      maxRowsPerPage: 10,
       activeName: 'first',
       infos: []
     };
