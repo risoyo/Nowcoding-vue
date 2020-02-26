@@ -46,6 +46,9 @@
       <el-menu-item index="Login">
         登陆
       </el-menu-item>
+      <el-menu-item index="MyPage">
+        我的
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -78,6 +81,9 @@ export default {
       } else if (key === 'Login') {
         console.log('home');
         this.$router.push('Login');
+      } else if (key === 'MyPage') {
+        console.log('MyPage');
+        this.$router.push('MyPage');
       }
     }
   }

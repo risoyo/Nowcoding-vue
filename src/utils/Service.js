@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { message, Loading } from 'element-ui';
+import { getCookie } from '@/utils/CookieUtils.js';
+import router from '@/router';
 const ConfigBaseURL = process.env.VUE_APP_BASE_API; // 默认路径，这里也可以使用env来判断环境
 let loadingInstance = null; // 这里是loading
 // 使用create方法创建axios实例
@@ -13,6 +15,12 @@ export const service = axios.create({
 });
 // 添加请求拦截器
 service.interceptors.request.use(config => {
+  const token = getCookie('token'); // 获取Cookie
+  console.log('token' + token);
+  if (token) {
+    config.headers.token = token;
+  }
+  console.log('header in Service' + JSON.stringify(config));
   loadingInstance = Loading.service({
     text: 'loading...',
     target: document.querySelector('.loadingtext')
@@ -25,7 +33,13 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
   response => {
     loadingInstance.close();
-    // console.log(response)
+    console.log('response raw' + JSON.stringify(response));
+    if (response.data.respCode == 400302) {
+      router.push({
+        path: '/Login',
+        query: { redirect: router.currentRoute.fullPath } // 从哪个页面跳转
+      });
+    }
     return response.data; // 返回response,此处返回response.data的话就是仅返回data节点
   },
   error => {
