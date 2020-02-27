@@ -70,9 +70,7 @@ export default {
         .then(resp => {
           // 将resp中的data数据存入infos
           this.infos = resp.data;
-          console.log('resp' + JSON.stringify(resp));
           this.totalPageNumber = parseInt(resp.message) * 10;
-          console.log('totalPageNumber' + this.totalPageNumber);
         })
         .catch(err => {
           // 当GET请求返回了Promise.reject对象时，捕获异常

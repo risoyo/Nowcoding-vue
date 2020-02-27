@@ -16,11 +16,10 @@ export const service = axios.create({
 // 添加请求拦截器
 service.interceptors.request.use(config => {
   const token = getCookie('token'); // 获取Cookie
-  console.log('token' + token);
   if (token) {
+    // 当cookie中存在token时，在header中加入token
     config.headers.token = token;
   }
-  console.log('header in Service' + JSON.stringify(config));
   loadingInstance = Loading.service({
     text: 'loading...',
     target: document.querySelector('.loadingtext')
@@ -33,7 +32,6 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
   response => {
     loadingInstance.close();
-    console.log('response raw' + JSON.stringify(response));
     if (response.data.respCode == 400302) {
       router.push({
         path: '/Login',

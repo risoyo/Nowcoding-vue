@@ -62,19 +62,13 @@ export default {
       console.log('form is:' + JSON.stringify(this.ruleForm));
       // 指定访问的URL
       const url = '/community/Login';
-      // TODO: 在请求时默认附带token到后台校验，token失效时要求重新登陆
       this.post(url, this.ruleForm)
         .then(function(res) {
           console.log(res);
           // 将响应res打印出来
-          console.log('响应res为' + res); // 将响应res打印出来
           console.log('token为' + res.data.token);
-          console.log('将token存入cookie');
           const expireDays = 1000 * 60 * 60;
           vm.setCookie('token', res.data.token, expireDays); // 设置cookie
-          console.log('cookie已存好');
-          const tokenFromCookie = vm.getCookie('token');
-          console.log('cookie中的token' + tokenFromCookie);
           vm.$router.push('/'); // 后台响应为成功时，导航至主页
         })
         .catch(e => {

@@ -7,6 +7,7 @@ import router from './router';
 import store from './store';
 import Vuex from 'vuex';
 import './plugins/element.js';
+import Router from 'vue-router';
 Vue.config.productionTip = false;
 Vue.prototype.$axios = service;
 Vue.prototype.get = get;
@@ -16,6 +17,12 @@ Vue.prototype.postService = postService;
 Vue.prototype.getCookie = getCookie;
 Vue.prototype.setCookie = setCookie;
 Vue.prototype.delCookie = delCookie;
+Vue.use(Router); // 引入Router
+const routerPush = Router.prototype.push;
+// 重写Vue-router的push方法，解决本页不能导向本页问题
+Router.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error => error);
+};
 new Vue({
   router,
   store,
