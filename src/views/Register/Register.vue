@@ -14,7 +14,7 @@
 
 <script>
 // @ is an alias to /src
-import RegisterMain from '@/components/Register/RegisterMain.vue';
+import RegisterMain from './RegisterMain.vue';
 import HeaderMain from '@/components/Common/HeaderMain.vue';
 
 export default {

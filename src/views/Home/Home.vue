@@ -1,11 +1,11 @@
 <template>
-  <div class="home">
+  <div id="app">
     <el-container>
       <el-header height="67px">
         <header-main></header-main>
       </el-header>
       <el-main>
-        <my-page></my-page>
+        <home-main></home-main>
       </el-main>
       <el-footer>Footer</el-footer>
     </el-container>
@@ -14,14 +14,14 @@
 
 <script>
 // @ is an alias to /src
-import MyPage from '@/components/MyPage/MyPageMain.vue';
+import HomeMain from './HomeMain.vue';
 import HeaderMain from '@/components/Common/HeaderMain.vue';
 
 export default {
-  name: 'Register',
+  name: 'App',
   components: {
     HeaderMain,
-    MyPage
+    HomeMain
   }
 };
 </script>

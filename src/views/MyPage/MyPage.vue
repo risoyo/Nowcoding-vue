@@ -5,7 +5,7 @@
         <header-main></header-main>
       </el-header>
       <el-main>
-        <login-main></login-main>
+        <my-page></my-page>
       </el-main>
       <el-footer>Footer</el-footer>
     </el-container>
@@ -14,14 +14,14 @@
 
 <script>
 // @ is an alias to /src
-import LoginMain from '@/components/Login/LoginMain.vue';
+import MyPage from './MyPageMain.vue';
 import HeaderMain from '@/components/Common/HeaderMain.vue';
 
 export default {
   name: 'Register',
   components: {
     HeaderMain,
-    LoginMain
+    MyPage
   }
 };
 </script>
