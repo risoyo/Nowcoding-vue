@@ -40,13 +40,13 @@
           </el-menu-item>
         </el-submenu>
       </el-submenu>
-      <el-menu-item index="Register">
+      <el-menu-item v-if="getLoginStatus" index="Register">
         注册
       </el-menu-item>
-      <el-menu-item index="Login">
+      <el-menu-item v-if="getLoginStatus" index="Login">
         登陆
       </el-menu-item>
-      <el-menu-item index="MyPage">
+      <el-menu-item v-else index="MyPage">
         我的
       </el-menu-item>
     </el-menu>
@@ -66,8 +66,22 @@ export default {
     return {
       // 声明使用的数组
       activeIndex: '1',
-      infos: []
+      login: true
     };
+  },
+  computed: {
+    getLoginStatus() {
+      const tokenExist = this.getCookie('token'); // 获取Cookie,当获取不到时tokenExist为null
+      if (!tokenExist) {
+        // catch: tokenExist != null
+        // 若token存在，表明已登陆，显示“我的”
+        return true;
+      } else {
+        // catch: tokenExist = null
+        // 若token不存在，表明未登录，显示“注册”与“登陆”
+        return false;
+      }
+    }
   },
   methods: {
     handleSelect(key, keyPath) {

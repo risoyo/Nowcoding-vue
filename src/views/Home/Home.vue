@@ -15,7 +15,7 @@
 <script>
 // @ is an alias to /src
 import HomeMain from './HomeMain.vue';
-import HeaderMain from '@/components/Common/Header/HeaderMain.vue';
+import HeaderMain from '@/components/Header/HeaderMain.vue';
 
 export default {
   name: 'App',

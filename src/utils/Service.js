@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { message, Loading } from 'element-ui';
-import { getCookie } from '@/utils/CookieUtils.js';
+import { getCookie, delCookie } from '@/utils/CookieUtils.js';
 import router from '@/router';
 const ConfigBaseURL = process.env.VUE_APP_BASE_API; // 默认路径，这里也可以使用env来判断环境
 let loadingInstance = null; // 这里是loading
@@ -33,6 +33,8 @@ service.interceptors.response.use(
   response => {
     loadingInstance.close();
     if (response.data.respCode == 400302) {
+      // 根据与后台约定，当响应码为400302时token无效（token错误或者时效已过）
+      delCookie('token'); // 将cookie中失效的token清除
       router.push({
         path: '/Login',
         query: { redirect: router.currentRoute.fullPath } // 从哪个页面跳转
