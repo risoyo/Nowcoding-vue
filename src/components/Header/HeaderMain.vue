@@ -46,9 +46,34 @@
       <el-menu-item v-if="getLoginStatus" index="Login">
         登陆
       </el-menu-item>
-      <el-menu-item v-else index="MyPage">
-        我的
-      </el-menu-item>
+      <el-submenu v-else index="My">
+        <template slot="title">
+          <el-avatar :src="circleUrl" size="large"></el-avatar>
+        </template>
+        <el-menu-item index="MyPage">
+          我的主页
+        </el-menu-item>
+        <el-menu-item index="Exit">
+          退出登录
+        </el-menu-item>
+        <el-menu-item index="2-3">
+          最热3
+        </el-menu-item>
+        <el-submenu index="2-4">
+          <template slot="title">
+            选项4
+          </template>
+          <el-menu-item index="2-4-1">
+            选项1
+          </el-menu-item>
+          <el-menu-item index="2-4-2">
+            选项2
+          </el-menu-item>
+          <el-menu-item index="2-4-3">
+            选项3
+          </el-menu-item>
+        </el-submenu>
+      </el-submenu>
     </el-menu>
   </div>
 </template>
@@ -66,7 +91,8 @@ export default {
     return {
       // 声明使用的数组
       activeIndex: '1',
-      login: true
+      circleUrl:
+        'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
     };
   },
   computed: {
@@ -98,6 +124,10 @@ export default {
       } else if (key === 'MyPage') {
         console.log('MyPage');
         this.$router.push('MyPage');
+      } else if (key === 'Exit') {
+        console.log('Exit');
+        this.delCookie('token'); // 将cookie中失效的token清除
+        this.$router.push('Login');
       }
     }
   }
