@@ -92,7 +92,7 @@ export default {
       // 声明使用的数组
       activeIndex: '1',
       circleUrl:
-        'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
+        'http://localhost:8080/community/img/header/20200301111940avator.png'
     };
   },
   computed: {
