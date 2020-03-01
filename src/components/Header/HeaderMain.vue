@@ -90,15 +90,12 @@ export default {
   data() {
     return {
       // 声明使用的数组
-      activeIndex: '1',
-      circleUrl:
-        'http://localhost:8080/community/img/header/20200301111940avator.png'
+      activeIndex: '1'
     };
   },
   computed: {
     getHeaderURL() {
       const headerURL = decodeURIComponent(this.getCookie('headerURL')); // 加入decodeURIComponent，否则传回来的URL会变为http%3A//localhost%3A8080/
-      console.log('header url is ' + headerURL);
       return headerURL;
     },
     getLoginStatus() {
@@ -107,7 +104,6 @@ export default {
       if (!tokenExist) {
         // catch: tokenExist != null
         // 若token存在，表明已登陆，显示“我的”
-        // this.circleUrl = headerURL;
         return true;
       } else {
         // catch: tokenExist = null

@@ -7,6 +7,7 @@ import { Message } from 'element-ui';
  * @return {Object} 应答数据
  */
 export function userAvatarUpload(url, data) {
+  console.log('userAvatarUpload url is ' + url);
   return new Promise((resolve, reject) => {
     service({
       method: 'POST',
