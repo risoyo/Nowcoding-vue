@@ -74,6 +74,9 @@
           </el-menu-item>
         </el-submenu>
       </el-submenu>
+      <el-menu-item index="test">
+        test
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -131,6 +134,9 @@ export default {
         console.log('Exit');
         this.delCookie('token'); // 将cookie中失效的token清除
         this.$router.push('Login');
+      } else if (key === 'test') {
+        console.log('Extestit');
+        this.$router.push('TestPage');
       }
     }
   }
