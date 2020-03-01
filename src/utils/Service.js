@@ -32,7 +32,8 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
   response => {
     loadingInstance.close();
-    if (response.data.respCode == 400302) {
+
+    if (response.data.respCode == 400302 || response.data.respCode == 400301) {
       // 根据与后台约定，当响应码为400302时token无效（token错误或者时效已过）
       delCookie('token'); // 将cookie中失效的token清除
       router.push({
