@@ -68,7 +68,8 @@ export default {
           // 将响应res打印出来
           console.log('token为' + res.data.token);
           const expireDays = 60 * 1000 * 30; // 设置cookie过期时间为30分钟，与后台token过期时间一致
-          vm.setCookie('token', res.data.token, expireDays); // 设置cookie
+          vm.setCookie('token', res.data.token, expireDays); // 存token到cookie
+          vm.setCookie('headerURL', res.data.headerURL, expireDays); // 存headerURL到cookie
           vm.$router.push('/'); // 后台响应为成功时，导航至主页
         })
         .catch(e => {

@@ -48,7 +48,7 @@
       </el-menu-item>
       <el-submenu v-else index="My">
         <template slot="title">
-          <el-avatar :src="circleUrl" size="large"></el-avatar>
+          <el-avatar :src="getHeaderURL" size="large"></el-avatar>
         </template>
         <el-menu-item index="MyPage">
           我的主页
@@ -96,11 +96,18 @@ export default {
     };
   },
   computed: {
+    getHeaderURL() {
+      const headerURL = decodeURIComponent(this.getCookie('headerURL')); // 加入decodeURIComponent，否则传回来的URL会变为http%3A//localhost%3A8080/
+      console.log('header url is ' + headerURL);
+      return headerURL;
+    },
     getLoginStatus() {
       const tokenExist = this.getCookie('token'); // 获取Cookie,当获取不到时tokenExist为null
+      // const headerURL = this.getCookie('headerURL');
       if (!tokenExist) {
         // catch: tokenExist != null
         // 若token存在，表明已登陆，显示“我的”
+        // this.circleUrl = headerURL;
         return true;
       } else {
         // catch: tokenExist = null

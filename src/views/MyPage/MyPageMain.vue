@@ -6,7 +6,7 @@
     </h3>
     <el-divider></el-divider>
     <el-form :model="form">
-      <el-form-item ref="uploadElement" :label-width="formLabelWidth">
+      <el-form-item ref="uploadElement">
         <el-upload
           ref="upload"
           :limit="limitNum"
