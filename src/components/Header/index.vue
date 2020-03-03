@@ -10,6 +10,9 @@
       <el-col>
         <search-bar />
       </el-col>
+      <el-col>
+        <classification-bar />
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -17,10 +20,12 @@
 <script>
 import topBar from './topbar.vue';
 import searchBar from './searchbar.vue';
+import classificationBar from './classificationBar.vue';
 export default {
   components: {
     topBar,
-    searchBar
+    searchBar,
+    classificationBar
   }
 };
 </script>
