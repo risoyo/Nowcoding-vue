@@ -26,4 +26,16 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss">
+@import '@/assets/css/public/layout.scss';
+@import '@/assets/css/public/header/index.scss';
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+#main_content {
+  // background: url(@/assets/picture/line.png) repeat-x left top #f8f8f8;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+</style>

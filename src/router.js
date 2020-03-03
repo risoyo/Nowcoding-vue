@@ -4,7 +4,7 @@ import Home from './views/Home/Home.vue';
 import Register from './views/Register/Register.vue';
 import Login from './views/Login/Login.vue';
 import MyPage from './views/MyPage/MyPage.vue';
-import TestPage from './views/TestPage.vue';
+import TestPage from './views/TestPage/TestPage.vue';
 import { getCookie } from '@/utils/CookieUtils.js';
 
 Vue.use(Router);
