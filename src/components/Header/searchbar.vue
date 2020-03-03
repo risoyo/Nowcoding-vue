@@ -40,12 +40,12 @@
         </div>
         <!-- 搜索框下面的建议内容 -->
         <p class="suggest">
-          <a href="#">Java</a>
+          <!-- <a href="#">Java</a>
           <a href="#">C#</a>
           <a href="#">中平业务</a>
           <a href="#">C4D基础</a>
           <a href="#">特效技巧</a>
-          <a href="#">软件测试</a>
+          <a href="#">软件测试</a> -->
         </p>
       </el-col>
       <!-- 实现切换到研发过程管控系统的图片 -->

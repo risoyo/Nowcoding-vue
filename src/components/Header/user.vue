@@ -1,3 +1,4 @@
+// 此文件是header的组成文件之一topbar的组成组件-用户登陆
 <template>
   <div class="m-geo">
     <template v-if="getterUserInfo">
@@ -16,7 +17,6 @@
 </template>
 
 <script>
-// 此文件是header的组成文件之一topbar的组成组件-用户登陆
 export default {
   data() {
     return {

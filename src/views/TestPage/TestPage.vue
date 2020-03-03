@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import HeaderMain from './index.vue';
+import HeaderMain from '@/components/Header/index.vue';
 export default {
   components: {
     HeaderMain
