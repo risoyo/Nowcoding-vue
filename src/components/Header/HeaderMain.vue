@@ -1,83 +1,122 @@
 <template>
   <div>
-    <el-menu
-      :default-active="activeIndex"
-      @select="handleSelect"
-      class="el-menu-demo"
-      mode="horizontal"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b"
-    >
-      <el-menu-item index="home">
-        首页
-      </el-menu-item>
-      <el-submenu index="2" disabled>
-        <template slot="title">
-          消息
-        </template>
-        <el-menu-item index="2-1">
-          最热1
-        </el-menu-item>
-        <el-menu-item index="2-2">
-          最热2
-        </el-menu-item>
-        <el-menu-item index="2-3">
-          最热3
-        </el-menu-item>
-        <el-submenu index="2-4">
-          <template slot="title">
-            选项4
-          </template>
-          <el-menu-item index="2-4-1">
-            选项1
-          </el-menu-item>
-          <el-menu-item index="2-4-2">
-            选项2
-          </el-menu-item>
-          <el-menu-item index="2-4-3">
-            选项3
-          </el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item v-if="getLoginStatus" index="Register">
-        注册
-      </el-menu-item>
-      <el-menu-item v-if="getLoginStatus" index="Login">
-        登陆
-      </el-menu-item>
-      <el-submenu v-else index="My">
-        <template slot="title">
-          <el-avatar :src="getHeaderURL" size="large"></el-avatar>
-        </template>
-        <el-menu-item index="MyPage">
-          我的主页
-        </el-menu-item>
-        <el-menu-item index="Exit">
-          退出登录
-        </el-menu-item>
-        <el-menu-item index="2-3">
-          最热3
-        </el-menu-item>
-        <el-submenu index="2-4">
-          <template slot="title">
-            选项4
-          </template>
-          <el-menu-item index="2-4-1">
-            选项1
-          </el-menu-item>
-          <el-menu-item index="2-4-2">
-            选项2
-          </el-menu-item>
-          <el-menu-item index="2-4-3">
-            选项3
-          </el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="test">
-        test
-      </el-menu-item>
-    </el-menu>
+    <el-row>
+      <el-col :span="6">
+        <div class="grid-content bg-purple">
+          <el-menu
+            :default-active="activeIndex"
+            @select="handleSelect"
+            mode="horizontal"
+            background-color="#FFFFFF"
+          >
+            <el-menu-item index="home">
+              首页
+            </el-menu-item>
+          </el-menu>
+          <!-- <el-image
+            style="width: 100px; height: 100px"
+            src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+            fit="contain"
+          ></el-image> -->
+        </div>
+      </el-col>
+      <el-col :span="12">
+        <div class="grid-content bg-purple">
+          <el-menu
+            :default-active="activeIndex"
+            @select="handleSelect"
+            class="el-menu-demo"
+            mode="horizontal"
+            background-color="#FFFFFF"
+            text-color="#757575"
+            active-text-color="#ffd04b"
+          >
+            <el-menu-item index="home">
+              首页
+            </el-menu-item>
+            <el-submenu index="2" disabled>
+              <template slot="title">
+                论坛
+              </template>
+              <el-menu-item index="2-1">
+                最热1
+              </el-menu-item>
+              <el-menu-item index="2-2">
+                最热2
+              </el-menu-item>
+              <el-menu-item index="2-3">
+                最热3
+              </el-menu-item>
+              <el-submenu index="2-4">
+                <template slot="title">
+                  选项4
+                </template>
+                <el-menu-item index="2-4-1">
+                  选项1
+                </el-menu-item>
+                <el-menu-item index="2-4-2">
+                  选项2
+                </el-menu-item>
+                <el-menu-item index="2-4-3">
+                  选项3
+                </el-menu-item>
+              </el-submenu>
+            </el-submenu>
+            <el-menu-item index="test">
+              test
+            </el-menu-item>
+          </el-menu>
+        </div>
+      </el-col>
+      <el-col :span="6">
+        <div class="grid-content bg-purple">
+          <el-menu
+            :default-active="activeIndex"
+            @select="handleSelect"
+            class="el-menu-demo"
+            mode="horizontal"
+            background-color="#FFFFFF"
+            text-color="#757575"
+            active-text-color="#ffd04b"
+          >
+            <el-menu-item v-if="getLoginStatus" index="Register">
+              注册
+            </el-menu-item>
+            <el-menu-item v-if="getLoginStatus" index="Login">
+              登陆
+            </el-menu-item>
+            <el-submenu v-else index="My">
+              <template slot="title">
+                <el-avatar :src="getHeaderURL" size="large"></el-avatar>
+              </template>
+              <el-menu-item index="MyPage">
+                我的主页
+              </el-menu-item>
+              <el-menu-item index="Exit">
+                退出登录
+              </el-menu-item>
+              <el-menu-item index="2-3">
+                最热3
+              </el-menu-item>
+              <el-submenu index="2-4">
+                <template slot="title">
+                  选项4
+                </template>
+                <el-menu-item index="2-4-1">
+                  选项1
+                </el-menu-item>
+                <el-menu-item index="2-4-2">
+                  选项2
+                </el-menu-item>
+                <el-menu-item index="2-4-3">
+                  选项3
+                </el-menu-item>
+              </el-submenu>
+            </el-submenu>
+          </el-menu>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
