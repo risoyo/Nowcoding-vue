@@ -1,55 +1,48 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="6">
-        <div class="grid-content bg-purple">
-          <el-menu
-            :default-active="activeIndex"
-            @select="handleSelect"
-            mode="horizontal"
-            background-color="#FFFFFF"
-          >
-            <el-menu-item index="home">
-              首页
-            </el-menu-item>
-          </el-menu>
-          <!-- <el-image
-            style="width: 100px; height: 100px"
-            src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-            fit="contain"
-          ></el-image> -->
-        </div>
+      <el-col :span="4">
+        <el-menu
+          :default-active="activeIndex"
+          class="el-menu-demo"
+          mode="horizontal"
+        >
+          <el-menu-item index="home">
+            <el-image
+              :src="require('@/assets/logo.png')"
+              class="logoImage"
+              fit="fill"
+            ></el-image>
+          </el-menu-item>
+        </el-menu>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="9">
         <div class="grid-content bg-purple">
           <el-menu
             :default-active="activeIndex"
             @select="handleSelect"
             class="el-menu-demo"
             mode="horizontal"
-            background-color="#FFFFFF"
-            text-color="#757575"
-            active-text-color="#ffd04b"
           >
             <el-menu-item index="home">
               首页
             </el-menu-item>
-            <el-submenu index="2" disabled>
+            <el-menu-item index="test">
+              培训系统
+            </el-menu-item>
+            <el-submenu index="2">
               <template slot="title">
                 论坛
               </template>
               <el-menu-item index="2-1">
-                最热1
+                最新内容
               </el-menu-item>
               <el-menu-item index="2-2">
-                最热2
-              </el-menu-item>
-              <el-menu-item index="2-3">
-                最热3
+                近期热门
               </el-menu-item>
               <el-submenu index="2-4">
                 <template slot="title">
-                  选项4
+                  分类
                 </template>
                 <el-menu-item index="2-4-1">
                   选项1
@@ -62,22 +55,51 @@
                 </el-menu-item>
               </el-submenu>
             </el-submenu>
+
             <el-menu-item index="test">
-              test
+              研发过程管控
             </el-menu-item>
           </el-menu>
         </div>
       </el-col>
       <el-col :span="6">
+        <el-menu
+          :default-active="activeIndex"
+          class="el-menu-demo"
+          mode="horizontal"
+        >
+          <el-menu-item index="home">
+            <div class="searchInput">
+              <el-input
+                v-model="input"
+                placeholder="请输入内容"
+                suffix-icon="el-icon-search"
+              ></el-input>
+            </div>
+          </el-menu-item>
+        </el-menu>
+      </el-col>
+      <!-- <el-col :span="4">
+        <div class="elMenuStyle">
+          <div class="searchInput">
+            <el-input v-model="input" placeholder="请输入内容"></el-input>
+          </div>
+        </div>
+      </el-col>
+      <el-col :span="2">
+        <div class="elMenuStyle">
+          <div class="searchButton">
+            <el-button icon="el-icon-search"></el-button>
+          </div>
+        </div>
+      </el-col> -->
+      <el-col :span="5">
         <div class="grid-content bg-purple">
           <el-menu
             :default-active="activeIndex"
             @select="handleSelect"
             class="el-menu-demo"
             mode="horizontal"
-            background-color="#FFFFFF"
-            text-color="#757575"
-            active-text-color="#ffd04b"
           >
             <el-menu-item v-if="getLoginStatus" index="Register">
               注册
@@ -181,3 +203,22 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.logoImage {
+  padding-top: 10px;
+  padding-left: 20px;
+}
+.elMenuStyle {
+  background-color: rgb(255, 255, 255);
+  border-bottom: solid 1px #e6e6e6;
+  height: 60px;
+
+  .searchInput {
+    padding-top: 10px;
+  }
+  .searchButton {
+    padding-top: 10px;
+  }
+}
+</style>

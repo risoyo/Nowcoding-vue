@@ -4,9 +4,18 @@
       <el-header height="67px">
         <header-main></header-main>
       </el-header>
-      <el-main>
-        <home-main></home-main>
-      </el-main>
+      <el-container>
+        <div class="MainContainer">
+          <el-col :span="5">
+            <home-aside></home-aside>
+          </el-col>
+          <el-col :span="8">
+            <el-main>
+              <home-main></home-main>
+            </el-main>
+          </el-col>
+        </div>
+      </el-container>
       <el-footer>Footer</el-footer>
     </el-container>
   </div>
@@ -15,27 +24,23 @@
 <script>
 // @ is an alias to /src
 import HomeMain from './HomeMain.vue';
-import HeaderMain from '@/components/Header/HeaderMain.vue';
+import HomeAside from './HomeAside.vue';
+import HeaderMain from '@/components/Header/HeaderIndex.vue';
 
 export default {
   name: 'App',
   components: {
     HeaderMain,
-    HomeMain
+    HomeMain,
+    HomeAside
   }
 };
 </script>
 
 <style lang="scss">
-@import '@/assets/css/public/layout.scss';
-@import '@/assets/css/public/header/index.scss';
-body {
-  width: 100%;
-  overflow-x: hidden;
-}
-#main_content {
-  // background: url(@/assets/picture/line.png) repeat-x left top #f8f8f8;
-  padding-top: 20px;
-  padding-bottom: 30px;
+.MainContainer {
+  width: 1190px;
+  margin-left: 395px;
+  margin-right: 395px;
 }
 </style>
